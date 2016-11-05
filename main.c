@@ -117,6 +117,6 @@ int main(int argc, char** argv) {
     free(pids);
     free(threads);
     printf("All threads stopped\n");
-    return (EXIT_SUCCESS);
+    return (EXIT_SUCCESS); 
 }
 
