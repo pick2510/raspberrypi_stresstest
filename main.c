@@ -48,7 +48,7 @@ void *workerThread(){
     char buffer[4096];
     int in_fd,out_fd;
     ssize_t readBytes, writtenBytes;
-    printf("Created thread: %d\n", tid++);
+    printf("Created thread: %d\n", ++tid);
     in_fd = open("/dev/zero", O_RDONLY);
     if (in_fd<0){
         printf("Error opening /dev/zero as Input. Aborting...");
