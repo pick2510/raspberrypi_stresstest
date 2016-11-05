@@ -78,7 +78,6 @@ void *workerThread(){
 
 int main(int argc, char** argv) {
     pthread_t *threads;
-    int *pids= NULL;
     int terr=0;
     int c, num_threads;
     char *c_threads = NULL;
@@ -98,7 +97,6 @@ int main(int argc, char** argv) {
          exit(EXIT_FAILURE);
      }
     num_threads = atoi(c_threads);
-    pids = calloc(num_threads,sizeof(int));
     threads = calloc(num_threads, sizeof(pthread_t));
     for (int i=0; i<num_threads; i++){
         terr = pthread_create(&threads[i], NULL, workerThread, NULL);
@@ -114,7 +112,6 @@ int main(int argc, char** argv) {
             exit(EXIT_FAILURE);
         }
     }
-    free(pids);
     free(threads);
     printf("All threads stopped\n");
     return (EXIT_SUCCESS); 
