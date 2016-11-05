@@ -26,6 +26,7 @@
  * 
  */
 static bool endFlag = false;
+static int tid = 0;
 
 
 void handle_exit(){
@@ -42,13 +43,12 @@ void print_usage(){
 }
 
 
-void *workerThread(void *id){
-    int *tid = id;
+void *workerThread(){
     ssize_t bytesRead, bytesWritten;
     char buffer[4096];
     int in_fd,out_fd;
     ssize_t readBytes, writtenBytes;
-    printf("Created thread: %d\n", *tid);
+    printf("Created thread: %d\n", tid++);
     in_fd = open("/dev/zero", O_RDONLY);
     if (in_fd<0){
         printf("Error opening /dev/zero as Input. Aborting...");
@@ -101,7 +101,7 @@ int main(int argc, char** argv) {
     pids = calloc(num_threads,sizeof(int));
     threads = calloc(num_threads, sizeof(pthread_t));
     for (int i=0; i<num_threads; i++){
-        terr = pthread_create(&threads[i], NULL, workerThread, &i);
+        terr = pthread_create(&threads[i], NULL, workerThread, NULL);
         if (terr){
             printf("Couldn't create thread %d, exiting.....", i);
             exit(EXIT_FAILURE);
