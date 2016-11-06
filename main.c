@@ -68,6 +68,7 @@ void *workerThread(void *buffersize) {
             exit(EXIT_FAILURE);
         }
     }
+    free(buffer);
     close(in_fd);
     close(out_fd);
 
